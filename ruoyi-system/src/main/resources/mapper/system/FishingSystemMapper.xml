@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FishingSystemMapper">
+    
+    <resultMap type="FishingSystem" id="FishingSystemResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userLevel"    column="user_level"    />
+        <result property="phone"    column="phone"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="area"    column="area"    />
+        <result property="fishingArea"    column="fishing_area"    />
+        <result property="homePort"    column="home_port"    />
+        <result property="jobWay"    column="job_way"    />
+        <result property="fishingSpecies"    column="fishing_species"    />
+        <result property="annualOutput"    column="annual_output"    />
+        <result property="annualFuel"    column="annual_fuel"    />
+        <result property="fuelValue"    column="fuel_value"    />
+        <result property="shipLength"    column="ship_length"    />
+        <result property="hostPower"    column="host_power"    />
+        <result property="annualLaborCost"    column="annual_labor_cost"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="type"    column="type"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectFishingSystemVo">
+        select id, name, user_level, phone, province, city, area, fishing_area, home_port, job_way, fishing_species, annual_output, annual_fuel, fuel_value, ship_length, host_power, annual_labor_cost, create_by, create_time, update_by, update_time, remark, type, user_id from tb_fishing_system
+    </sql>
+
+    <select id="selectFishingSystemList" parameterType="FishingSystem" resultMap="FishingSystemResult">
+        <include refid="selectFishingSystemVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="fishingArea != null  and fishingArea != ''"> and fishing_area = #{fishingArea}</if>
+            <if test="homePort != null  and homePort != ''"> and home_port = #{homePort}</if>
+            <if test="jobWay != null  and jobWay != ''"> and job_way = #{jobWay}</if>
+            <if test="fishingSpecies != null  and fishingSpecies != ''"> and fishing_species = #{fishingSpecies}</if>
+            <if test="annualOutput != null  and annualOutput != ''"> and annual_output = #{annualOutput}</if>
+            <if test="annualFuel != null  and annualFuel != ''"> and annual_fuel = #{annualFuel}</if>
+            <if test="fuelValue != null "> and fuel_value = #{fuelValue}</if>
+            <if test="shipLength != null  and shipLength != ''"> and ship_length = #{shipLength}</if>
+            <if test="hostPower != null  and hostPower != ''"> and host_power = #{hostPower}</if>
+            <if test="annualLaborCost != null "> and annual_labor_cost = #{annualLaborCost}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFishingSystemById" parameterType="Long" resultMap="FishingSystemResult">
+        <include refid="selectFishingSystemVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFishingSystem" parameterType="FishingSystem" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_fishing_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userLevel != null">user_level,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="province != null and province != ''">province,</if>
+            <if test="city != null and city != ''">city,</if>
+            <if test="area != null and area != ''">area,</if>
+            <if test="fishingArea != null and fishingArea != ''">fishing_area,</if>
+            <if test="homePort != null and homePort != ''">home_port,</if>
+            <if test="jobWay != null and jobWay != ''">job_way,</if>
+            <if test="fishingSpecies != null and fishingSpecies != ''">fishing_species,</if>
+            <if test="annualOutput != null and annualOutput != ''">annual_output,</if>
+            <if test="annualFuel != null and annualFuel != ''">annual_fuel,</if>
+            <if test="fuelValue != null">fuel_value,</if>
+            <if test="shipLength != null and shipLength != ''">ship_length,</if>
+            <if test="hostPower != null and hostPower != ''">host_power,</if>
+            <if test="annualLaborCost != null">annual_labor_cost,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="type != null">type,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userLevel != null">#{userLevel},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="province != null and province != ''">#{province},</if>
+            <if test="city != null and city != ''">#{city},</if>
+            <if test="area != null and area != ''">#{area},</if>
+            <if test="fishingArea != null and fishingArea != ''">#{fishingArea},</if>
+            <if test="homePort != null and homePort != ''">#{homePort},</if>
+            <if test="jobWay != null and jobWay != ''">#{jobWay},</if>
+            <if test="fishingSpecies != null and fishingSpecies != ''">#{fishingSpecies},</if>
+            <if test="annualOutput != null and annualOutput != ''">#{annualOutput},</if>
+            <if test="annualFuel != null and annualFuel != ''">#{annualFuel},</if>
+            <if test="fuelValue != null">#{fuelValue},</if>
+            <if test="shipLength != null and shipLength != ''">#{shipLength},</if>
+            <if test="hostPower != null and hostPower != ''">#{hostPower},</if>
+            <if test="annualLaborCost != null">#{annualLaborCost},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="type != null">#{type},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFishingSystem" parameterType="FishingSystem">
+        update tb_fishing_system
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userLevel != null">user_level = #{userLevel},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="province != null and province != ''">province = #{province},</if>
+            <if test="city != null and city != ''">city = #{city},</if>
+            <if test="area != null and area != ''">area = #{area},</if>
+            <if test="fishingArea != null and fishingArea != ''">fishing_area = #{fishingArea},</if>
+            <if test="homePort != null and homePort != ''">home_port = #{homePort},</if>
+            <if test="jobWay != null and jobWay != ''">job_way = #{jobWay},</if>
+            <if test="fishingSpecies != null and fishingSpecies != ''">fishing_species = #{fishingSpecies},</if>
+            <if test="annualOutput != null and annualOutput != ''">annual_output = #{annualOutput},</if>
+            <if test="annualFuel != null and annualFuel != ''">annual_fuel = #{annualFuel},</if>
+            <if test="fuelValue != null">fuel_value = #{fuelValue},</if>
+            <if test="shipLength != null and shipLength != ''">ship_length = #{shipLength},</if>
+            <if test="hostPower != null and hostPower != ''">host_power = #{hostPower},</if>
+            <if test="annualLaborCost != null">annual_labor_cost = #{annualLaborCost},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFishingSystemById" parameterType="Long">
+        delete from tb_fishing_system where id = #{id}
+    </delete>
+
+    <delete id="deleteFishingSystemByIds" parameterType="String">
+        delete from tb_fishing_system where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectFishingSystemListByUserLevel" parameterType="FishingSystem" resultMap="FishingSystemResult">
+
+        SELECT
+        id,
+        NAME,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        fishing_area,
+        home_port,
+        job_way,
+        fishing_species,
+        annual_output,
+        annual_fuel,
+        fuel_value,
+        ship_length,
+        host_power,
+        annual_labor_cost,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+        FROM
+        (
+
+
+SELECT
+	id,
+	NAME,
+	user_level,
+	phone,
+	province,
+	city,
+	area,
+	fishing_area,
+	home_port,
+	job_way,
+	fishing_species,
+	annual_output,
+	annual_fuel,
+	fuel_value,
+	ship_length,
+	host_power,
+	annual_labor_cost,
+	create_by,
+	create_time,
+	update_by,
+	update_time,
+	remark,
+	type,
+	user_id
+FROM
+	tb_fishing_system
+
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="fishingArea != null  and fishingArea != ''"> and fishing_area = #{fishingArea}</if>
+            <if test="homePort != null  and homePort != ''"> and home_port = #{homePort}</if>
+            <if test="jobWay != null  and jobWay != ''"> and job_way = #{jobWay}</if>
+            <if test="fishingSpecies != null  and fishingSpecies != ''"> and fishing_species = #{fishingSpecies}</if>
+            <if test="annualOutput != null  and annualOutput != ''"> and annual_output = #{annualOutput}</if>
+            <if test="annualFuel != null  and annualFuel != ''"> and annual_fuel = #{annualFuel}</if>
+            <if test="fuelValue != null "> and fuel_value = #{fuelValue}</if>
+            <if test="shipLength != null  and shipLength != ''"> and ship_length = #{shipLength}</if>
+            <if test="hostPower != null  and hostPower != ''"> and host_power = #{hostPower}</if>
+            <if test="annualLaborCost != null "> and annual_labor_cost = #{annualLaborCost}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+
+        union
+
+(
+        SELECT
+        id,
+        NAME,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        fishing_area,
+        home_port,
+        job_way,
+        fishing_species,
+        annual_output,
+        annual_fuel,
+        fuel_value,
+        ship_length,
+        host_power,
+        annual_labor_cost,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+        FROM
+        tb_fishing_system
+
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="fishingArea != null  and fishingArea != ''"> and fishing_area = #{fishingArea}</if>
+            <if test="homePort != null  and homePort != ''"> and home_port = #{homePort}</if>
+            <if test="jobWay != null  and jobWay != ''"> and job_way = #{jobWay}</if>
+            <if test="fishingSpecies != null  and fishingSpecies != ''"> and fishing_species = #{fishingSpecies}</if>
+            <if test="annualOutput != null  and annualOutput != ''"> and annual_output = #{annualOutput}</if>
+            <if test="annualFuel != null  and annualFuel != ''"> and annual_fuel = #{annualFuel}</if>
+            <if test="fuelValue != null "> and fuel_value = #{fuelValue}</if>
+            <if test="shipLength != null  and shipLength != ''"> and ship_length = #{shipLength}</if>
+            <if test="hostPower != null  and hostPower != ''"> and host_power = #{hostPower}</if>
+            <if test="annualLaborCost != null "> and annual_labor_cost = #{annualLaborCost}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id != #{userId}</if>
+        </where>
+
+        LIMIT
+        #{userLevelNum}
+
+        )
+
+        ) a
+
+
+
+
+    </select>
+</mapper>

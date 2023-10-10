@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ReservoirSystemMapper">
+    
+    <resultMap type="ReservoirSystem" id="ReservoirSystemResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userLevel"    column="user_level"    />
+        <result property="phone"    column="phone"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="area"    column="area"    />
+        <result property="waters"    column="waters"    />
+        <result property="extent"    column="extent"    />
+        <result property="extentDanwei"    column="extent_danwei"    />
+        <result property="breedingSpecies"    column="breeding_species"    />
+        <result property="fish"    column="fish"    />
+        <result property="annualOutput"    column="annual_output"    />
+        <result property="annualOutputDanwei"    column="annual_output_danwei"    />
+        <result property="annualOutputType"    column="annual_output_type"    />
+        <result property="sellingPrice"    column="selling_price"    />
+        <result property="annualOutputProportion"    column="annual_output_proportion"    />
+        <result property="annualRelease"    column="annual_release"    />
+        <result property="annualReleaseType"    column="annual_release_type"    />
+        <result property="seedlingPrice"    column="seedling_price"    />
+        <result property="annualReleaseProportion"    column="annual_release_proportion"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="type"    column="type"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectReservoirSystemVo">
+        select id, name, user_level, phone, province, city, area, waters, extent, extent_danwei, breeding_species, fish, annual_output, annual_output_danwei, annual_output_type, selling_price, annual_output_proportion, annual_release, annual_release_type, seedling_price, annual_release_proportion, create_by, create_time, update_by, update_time, remark, type, user_id from tb_reservoir_system
+    </sql>
+
+    <select id="selectReservoirSystemList" parameterType="ReservoirSystem" resultMap="ReservoirSystemResult">
+        <include refid="selectReservoirSystemVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="waters != null  and waters != ''"> and waters = #{waters}</if>
+            <if test="extent != null  and extent != ''"> and extent = #{extent}</if>
+            <if test="extentDanwei != null  and extentDanwei != ''"> and extent_danwei = #{extentDanwei}</if>
+            <if test="breedingSpecies != null  and breedingSpecies != ''"> and breeding_species = #{breedingSpecies}</if>
+            <if test="fish != null  and fish != ''"> and fish = #{fish}</if>
+            <if test="annualOutput != null  and annualOutput != ''"> and annual_output = #{annualOutput}</if>
+            <if test="annualOutputDanwei != null  and annualOutputDanwei != ''"> and annual_output_danwei = #{annualOutputDanwei}</if>
+            <if test="annualOutputType != null  and annualOutputType != ''"> and annual_output_type = #{annualOutputType}</if>
+            <if test="sellingPrice != null "> and selling_price = #{sellingPrice}</if>
+            <if test="annualOutputProportion != null  and annualOutputProportion != ''"> and annual_output_proportion = #{annualOutputProportion}</if>
+            <if test="annualRelease != null  and annualRelease != ''"> and annual_release = #{annualRelease}</if>
+            <if test="annualReleaseType != null  and annualReleaseType != ''"> and annual_release_type = #{annualReleaseType}</if>
+            <if test="seedlingPrice != null  and seedlingPrice != ''"> and seedling_price = #{seedlingPrice}</if>
+            <if test="annualReleaseProportion != null  and annualReleaseProportion != ''"> and annual_release_proportion = #{annualReleaseProportion}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectReservoirSystemById" parameterType="Long" resultMap="ReservoirSystemResult">
+        <include refid="selectReservoirSystemVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertReservoirSystem" parameterType="ReservoirSystem" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_reservoir_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userLevel != null and userLevel != ''">user_level,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="area != null">area,</if>
+            <if test="waters != null and waters != ''">waters,</if>
+            <if test="extent != null and extent != ''">extent,</if>
+            <if test="extentDanwei != null and extentDanwei != ''">extent_danwei,</if>
+            <if test="breedingSpecies != null and breedingSpecies != ''">breeding_species,</if>
+            <if test="fish != null and fish != ''">fish,</if>
+            <if test="annualOutput != null and annualOutput != ''">annual_output,</if>
+            <if test="annualOutputDanwei != null and annualOutputDanwei != ''">annual_output_danwei,</if>
+            <if test="annualOutputType != null and annualOutputType != ''">annual_output_type,</if>
+            <if test="sellingPrice != null">selling_price,</if>
+            <if test="annualOutputProportion != null and annualOutputProportion != ''">annual_output_proportion,</if>
+            <if test="annualRelease != null and annualRelease != ''">annual_release,</if>
+            <if test="annualReleaseType != null and annualReleaseType != ''">annual_release_type,</if>
+            <if test="seedlingPrice != null and seedlingPrice != ''">seedling_price,</if>
+            <if test="annualReleaseProportion != null and annualReleaseProportion != ''">annual_release_proportion,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="type != null">type,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userLevel != null and userLevel != ''">#{userLevel},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="area != null">#{area},</if>
+            <if test="waters != null and waters != ''">#{waters},</if>
+            <if test="extent != null and extent != ''">#{extent},</if>
+            <if test="extentDanwei != null and extentDanwei != ''">#{extentDanwei},</if>
+            <if test="breedingSpecies != null and breedingSpecies != ''">#{breedingSpecies},</if>
+            <if test="fish != null and fish != ''">#{fish},</if>
+            <if test="annualOutput != null and annualOutput != ''">#{annualOutput},</if>
+            <if test="annualOutputDanwei != null and annualOutputDanwei != ''">#{annualOutputDanwei},</if>
+            <if test="annualOutputType != null and annualOutputType != ''">#{annualOutputType},</if>
+            <if test="sellingPrice != null">#{sellingPrice},</if>
+            <if test="annualOutputProportion != null and annualOutputProportion != ''">#{annualOutputProportion},</if>
+            <if test="annualRelease != null and annualRelease != ''">#{annualRelease},</if>
+            <if test="annualReleaseType != null and annualReleaseType != ''">#{annualReleaseType},</if>
+            <if test="seedlingPrice != null and seedlingPrice != ''">#{seedlingPrice},</if>
+            <if test="annualReleaseProportion != null and annualReleaseProportion != ''">#{annualReleaseProportion},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="type != null">#{type},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateReservoirSystem" parameterType="ReservoirSystem">
+        update tb_reservoir_system
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userLevel != null and userLevel != ''">user_level = #{userLevel},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="waters != null and waters != ''">waters = #{waters},</if>
+            <if test="extent != null and extent != ''">extent = #{extent},</if>
+            <if test="extentDanwei != null and extentDanwei != ''">extent_danwei = #{extentDanwei},</if>
+            <if test="breedingSpecies != null and breedingSpecies != ''">breeding_species = #{breedingSpecies},</if>
+            <if test="fish != null and fish != ''">fish = #{fish},</if>
+            <if test="annualOutput != null and annualOutput != ''">annual_output = #{annualOutput},</if>
+            <if test="annualOutputDanwei != null and annualOutputDanwei != ''">annual_output_danwei = #{annualOutputDanwei},</if>
+            <if test="annualOutputType != null and annualOutputType != ''">annual_output_type = #{annualOutputType},</if>
+            <if test="sellingPrice != null">selling_price = #{sellingPrice},</if>
+            <if test="annualOutputProportion != null and annualOutputProportion != ''">annual_output_proportion = #{annualOutputProportion},</if>
+            <if test="annualRelease != null and annualRelease != ''">annual_release = #{annualRelease},</if>
+            <if test="annualReleaseType != null and annualReleaseType != ''">annual_release_type = #{annualReleaseType},</if>
+            <if test="seedlingPrice != null and seedlingPrice != ''">seedling_price = #{seedlingPrice},</if>
+            <if test="annualReleaseProportion != null and annualReleaseProportion != ''">annual_release_proportion = #{annualReleaseProportion},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteReservoirSystemById" parameterType="Long">
+        delete from tb_reservoir_system where id = #{id}
+    </delete>
+
+    <delete id="deleteReservoirSystemByIds" parameterType="String">
+        delete from tb_reservoir_system where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectReservoirSystemListByUserLevel" parameterType="ReservoirSystem" resultMap="ReservoirSystemResult">
+
+        SELECT
+        id,
+        NAME,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        waters,
+        extent,
+        extent_danwei,
+        breeding_species,
+        fish,
+        annual_output,
+        annual_output_danwei,
+        annual_output_type,
+        selling_price,
+        annual_output_proportion,
+        annual_release,
+        annual_release_type,
+        seedling_price,
+        annual_release_proportion,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+
+        from
+        (
+
+
+        SELECT
+	id,
+	NAME,
+	user_level,
+	phone,
+	province,
+	city,
+	area,
+	waters,
+	extent,
+	extent_danwei,
+	breeding_species,
+	fish,
+	annual_output,
+	annual_output_danwei,
+	annual_output_type,
+	selling_price,
+	annual_output_proportion,
+	annual_release,
+	annual_release_type,
+	seedling_price,
+	annual_release_proportion,
+	create_by,
+	create_time,
+	update_by,
+	update_time,
+	remark,
+	type,
+	user_id
+FROM
+	tb_reservoir_system
+
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="waters != null  and waters != ''"> and waters = #{waters}</if>
+            <if test="extent != null  and extent != ''"> and extent = #{extent}</if>
+            <if test="extentDanwei != null  and extentDanwei != ''"> and extent_danwei = #{extentDanwei}</if>
+            <if test="breedingSpecies != null  and breedingSpecies != ''"> and breeding_species = #{breedingSpecies}</if>
+            <if test="fish != null  and fish != ''"> and fish = #{fish}</if>
+            <if test="annualOutput != null  and annualOutput != ''"> and annual_output = #{annualOutput}</if>
+            <if test="annualOutputDanwei != null  and annualOutputDanwei != ''"> and annual_output_danwei = #{annualOutputDanwei}</if>
+            <if test="annualOutputType != null  and annualOutputType != ''"> and annual_output_type = #{annualOutputType}</if>
+            <if test="sellingPrice != null "> and selling_price = #{sellingPrice}</if>
+            <if test="annualOutputProportion != null  and annualOutputProportion != ''"> and annual_output_proportion = #{annualOutputProportion}</if>
+            <if test="annualRelease != null  and annualRelease != ''"> and annual_release = #{annualRelease}</if>
+            <if test="annualReleaseType != null  and annualReleaseType != ''"> and annual_release_type = #{annualReleaseType}</if>
+            <if test="seedlingPrice != null  and seedlingPrice != ''"> and seedling_price = #{seedlingPrice}</if>
+            <if test="annualReleaseProportion != null  and annualReleaseProportion != ''"> and annual_release_proportion = #{annualReleaseProportion}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+
+        union
+        (
+
+        SELECT
+        id,
+        NAME,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        waters,
+        extent,
+        extent_danwei,
+        breeding_species,
+        fish,
+        annual_output,
+        annual_output_danwei,
+        annual_output_type,
+        selling_price,
+        annual_output_proportion,
+        annual_release,
+        annual_release_type,
+        seedling_price,
+        annual_release_proportion,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+        FROM
+        tb_reservoir_system
+
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="waters != null  and waters != ''"> and waters = #{waters}</if>
+            <if test="extent != null  and extent != ''"> and extent = #{extent}</if>
+            <if test="extentDanwei != null  and extentDanwei != ''"> and extent_danwei = #{extentDanwei}</if>
+            <if test="breedingSpecies != null  and breedingSpecies != ''"> and breeding_species = #{breedingSpecies}</if>
+            <if test="fish != null  and fish != ''"> and fish = #{fish}</if>
+            <if test="annualOutput != null  and annualOutput != ''"> and annual_output = #{annualOutput}</if>
+            <if test="annualOutputDanwei != null  and annualOutputDanwei != ''"> and annual_output_danwei = #{annualOutputDanwei}</if>
+            <if test="annualOutputType != null  and annualOutputType != ''"> and annual_output_type = #{annualOutputType}</if>
+            <if test="sellingPrice != null "> and selling_price = #{sellingPrice}</if>
+            <if test="annualOutputProportion != null  and annualOutputProportion != ''"> and annual_output_proportion = #{annualOutputProportion}</if>
+            <if test="annualRelease != null  and annualRelease != ''"> and annual_release = #{annualRelease}</if>
+            <if test="annualReleaseType != null  and annualReleaseType != ''"> and annual_release_type = #{annualReleaseType}</if>
+            <if test="seedlingPrice != null  and seedlingPrice != ''"> and seedling_price = #{seedlingPrice}</if>
+            <if test="annualReleaseProportion != null  and annualReleaseProportion != ''"> and annual_release_proportion = #{annualReleaseProportion}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id != #{userId}</if>
+        </where>
+
+        LIMIT
+        #{userLevelNum}
+
+        )
+
+
+        ) a
+
+
+
+
+
+
+
+
+    </select>
+</mapper>

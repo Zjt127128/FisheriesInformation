@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ReservoirInformationMapper">
+    
+    <resultMap type="ReservoirInformation" id="ReservoirInformationResult">
+        <result property="id"    column="id"    />
+        <result property="waterType"    column="water_type"    />
+        <result property="seedlingSpecifications"    column="seedling_specifications"    />
+        <result property="seedlingPrice"    column="seedling_price"    />
+        <result property="annualStockingVolume"    column="annual_stocking_volume"    />
+        <result property="salesSpecifications"    column="sales_specifications"    />
+        <result property="averagePricePerSale"    column="average_price_per_sale"    />
+        <result property="annualProductionVolume"    column="annual_production_volume"    />
+        <result property="geographical"    column="geographical"    />
+        <result property="cultureMethod"    column="culture_method"    />
+        <result property="cultureStage"    column="culture_stage"    />
+        <result property="industrialMaturity"    column="industrial_maturity"    />
+        <result property="waterArea"    column="water_area"    />
+        <result property="seedlingSpecificationsUnit"    column="seedling_specifications_unit"    />
+        <result property="seedlingPriceUnit"    column="seedling_price_unit"    />
+        <result property="annualStockingVolumeUnit"    column="annual_stocking_volume_unit"    />
+        <result property="salesSpecificationsUnit"    column="sales_specifications_unit"    />
+        <result property="averagePricePerSaleUnit"    column="average_price_per_sale_unit"    />
+        <result property="annualProductionVolumeUnit"    column="annual_production_volume_unit"    />
+        <result property="reservoirName"    column="reservoir_name"    />
+    </resultMap>
+
+    <sql id="selectReservoirInformationVo">
+        select id, water_type, seedling_specifications, seedling_price, annual_stocking_volume, sales_specifications, average_price_per_sale, annual_production_volume, geographical, culture_method, culture_stage, industrial_maturity, water_area, seedling_specifications_unit, seedling_price_unit, annual_stocking_volume_unit, sales_specifications_unit, average_price_per_sale_unit, annual_production_volume_unit, reservoir_name from reservoir_information
+    </sql>
+
+    <select id="selectReservoirInformationList" parameterType="ReservoirInformation" resultMap="ReservoirInformationResult">
+        <include refid="selectReservoirInformationVo"/>
+        <where>  
+            <if test="waterType != null "> and water_type = #{waterType}</if>
+            <if test="seedlingSpecifications != null  and seedlingSpecifications != ''"> and seedling_specifications = #{seedlingSpecifications}</if>
+            <if test="seedlingPrice != null "> and seedling_price = #{seedlingPrice}</if>
+            <if test="annualStockingVolume != null "> and annual_stocking_volume = #{annualStockingVolume}</if>
+            <if test="salesSpecifications != null  and salesSpecifications != ''"> and sales_specifications = #{salesSpecifications}</if>
+            <if test="averagePricePerSale != null "> and average_price_per_sale = #{averagePricePerSale}</if>
+            <if test="annualProductionVolume != null "> and annual_production_volume = #{annualProductionVolume}</if>
+            <if test="geographical != null  and geographical != ''"> and geographical = #{geographical}</if>
+            <if test="cultureMethod != null  and cultureMethod != ''"> and culture_method = #{cultureMethod}</if>
+            <if test="cultureStage != null  and cultureStage != ''"> and culture_stage = #{cultureStage}</if>
+            <if test="industrialMaturity != null  and industrialMaturity != ''"> and industrial_maturity = #{industrialMaturity}</if>
+            <if test="waterArea != null  and waterArea != ''"> and water_area = #{waterArea}</if>
+            <if test="seedlingSpecificationsUnit != null  and seedlingSpecificationsUnit != ''"> and seedling_specifications_unit = #{seedlingSpecificationsUnit}</if>
+            <if test="seedlingPriceUnit != null  and seedlingPriceUnit != ''"> and seedling_price_unit = #{seedlingPriceUnit}</if>
+            <if test="annualStockingVolumeUnit != null  and annualStockingVolumeUnit != ''"> and annual_stocking_volume_unit = #{annualStockingVolumeUnit}</if>
+            <if test="salesSpecificationsUnit != null  and salesSpecificationsUnit != ''"> and sales_specifications_unit = #{salesSpecificationsUnit}</if>
+            <if test="averagePricePerSaleUnit != null  and averagePricePerSaleUnit != ''"> and average_price_per_sale_unit = #{averagePricePerSaleUnit}</if>
+            <if test="annualProductionVolumeUnit != null  and annualProductionVolumeUnit != ''"> and annual_production_volume_unit = #{annualProductionVolumeUnit}</if>
+            <if test="reservoirName != null  and reservoirName != ''"> and reservoir_name like concat('%', #{reservoirName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectReservoirInformationById" parameterType="Long" resultMap="ReservoirInformationResult">
+        <include refid="selectReservoirInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertReservoirInformation" parameterType="ReservoirInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into reservoir_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="waterType != null">water_type,</if>
+            <if test="seedlingSpecifications != null">seedling_specifications,</if>
+            <if test="seedlingPrice != null">seedling_price,</if>
+            <if test="annualStockingVolume != null">annual_stocking_volume,</if>
+            <if test="salesSpecifications != null">sales_specifications,</if>
+            <if test="averagePricePerSale != null">average_price_per_sale,</if>
+            <if test="annualProductionVolume != null">annual_production_volume,</if>
+            <if test="geographical != null">geographical,</if>
+            <if test="cultureMethod != null">culture_method,</if>
+            <if test="cultureStage != null">culture_stage,</if>
+            <if test="industrialMaturity != null">industrial_maturity,</if>
+            <if test="waterArea != null">water_area,</if>
+            <if test="seedlingSpecificationsUnit != null">seedling_specifications_unit,</if>
+            <if test="seedlingPriceUnit != null">seedling_price_unit,</if>
+            <if test="annualStockingVolumeUnit != null">annual_stocking_volume_unit,</if>
+            <if test="salesSpecificationsUnit != null">sales_specifications_unit,</if>
+            <if test="averagePricePerSaleUnit != null">average_price_per_sale_unit,</if>
+            <if test="annualProductionVolumeUnit != null">annual_production_volume_unit,</if>
+            <if test="reservoirName != null">reservoir_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="waterType != null">#{waterType},</if>
+            <if test="seedlingSpecifications != null">#{seedlingSpecifications},</if>
+            <if test="seedlingPrice != null">#{seedlingPrice},</if>
+            <if test="annualStockingVolume != null">#{annualStockingVolume},</if>
+            <if test="salesSpecifications != null">#{salesSpecifications},</if>
+            <if test="averagePricePerSale != null">#{averagePricePerSale},</if>
+            <if test="annualProductionVolume != null">#{annualProductionVolume},</if>
+            <if test="geographical != null">#{geographical},</if>
+            <if test="cultureMethod != null">#{cultureMethod},</if>
+            <if test="cultureStage != null">#{cultureStage},</if>
+            <if test="industrialMaturity != null">#{industrialMaturity},</if>
+            <if test="waterArea != null">#{waterArea},</if>
+            <if test="seedlingSpecificationsUnit != null">#{seedlingSpecificationsUnit},</if>
+            <if test="seedlingPriceUnit != null">#{seedlingPriceUnit},</if>
+            <if test="annualStockingVolumeUnit != null">#{annualStockingVolumeUnit},</if>
+            <if test="salesSpecificationsUnit != null">#{salesSpecificationsUnit},</if>
+            <if test="averagePricePerSaleUnit != null">#{averagePricePerSaleUnit},</if>
+            <if test="annualProductionVolumeUnit != null">#{annualProductionVolumeUnit},</if>
+            <if test="reservoirName != null">#{reservoirName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateReservoirInformation" parameterType="ReservoirInformation">
+        update reservoir_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="waterType != null">water_type = #{waterType},</if>
+            <if test="seedlingSpecifications != null">seedling_specifications = #{seedlingSpecifications},</if>
+            <if test="seedlingPrice != null">seedling_price = #{seedlingPrice},</if>
+            <if test="annualStockingVolume != null">annual_stocking_volume = #{annualStockingVolume},</if>
+            <if test="salesSpecifications != null">sales_specifications = #{salesSpecifications},</if>
+            <if test="averagePricePerSale != null">average_price_per_sale = #{averagePricePerSale},</if>
+            <if test="annualProductionVolume != null">annual_production_volume = #{annualProductionVolume},</if>
+            <if test="geographical != null">geographical = #{geographical},</if>
+            <if test="cultureMethod != null">culture_method = #{cultureMethod},</if>
+            <if test="cultureStage != null">culture_stage = #{cultureStage},</if>
+            <if test="industrialMaturity != null">industrial_maturity = #{industrialMaturity},</if>
+            <if test="waterArea != null">water_area = #{waterArea},</if>
+            <if test="seedlingSpecificationsUnit != null">seedling_specifications_unit = #{seedlingSpecificationsUnit},</if>
+            <if test="seedlingPriceUnit != null">seedling_price_unit = #{seedlingPriceUnit},</if>
+            <if test="annualStockingVolumeUnit != null">annual_stocking_volume_unit = #{annualStockingVolumeUnit},</if>
+            <if test="salesSpecificationsUnit != null">sales_specifications_unit = #{salesSpecificationsUnit},</if>
+            <if test="averagePricePerSaleUnit != null">average_price_per_sale_unit = #{averagePricePerSaleUnit},</if>
+            <if test="annualProductionVolumeUnit != null">annual_production_volume_unit = #{annualProductionVolumeUnit},</if>
+            <if test="reservoirName != null">reservoir_name = #{reservoirName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteReservoirInformationById" parameterType="Long">
+        delete from reservoir_information where id = #{id}
+    </delete>
+
+    <delete id="deleteReservoirInformationByIds" parameterType="String">
+        delete from reservoir_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.OwnerSystemMapper">
+    
+    <resultMap type="OwnerSystem" id="OwnerSystemResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userLevel"    column="user_level"    />
+        <result property="phone"    column="phone"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="area"    column="area"    />
+        <result property="identityCategory"    column="identity_category"    />
+        <result property="helpInformation"    column="help_information"    />
+        <result property="connectionStatus"    column="connection_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="type"    column="type"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectOwnerSystemVo">
+        select id, name, user_level, phone, province, city, area, identity_category, help_information, connection_status, create_by, create_time, update_by, update_time, remark, type, user_id from tb_owner_system
+    </sql>
+
+    <select id="selectOwnerSystemList" parameterType="OwnerSystem" resultMap="OwnerSystemResult">
+        <include refid="selectOwnerSystemVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="identityCategory != null  and identityCategory != ''"> and identity_category = #{identityCategory}</if>
+            <if test="helpInformation != null  and helpInformation != ''"> and help_information = #{helpInformation}</if>
+            <if test="connectionStatus != null  and connectionStatus != ''"> and connection_status = #{connectionStatus}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectOwnerSystemById" parameterType="Long" resultMap="OwnerSystemResult">
+        <include refid="selectOwnerSystemVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOwnerSystem" parameterType="OwnerSystem" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_owner_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userLevel != null">user_level,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="area != null">area,</if>
+            <if test="identityCategory != null and identityCategory != ''">identity_category,</if>
+            <if test="helpInformation != null and helpInformation != ''">help_information,</if>
+            <if test="connectionStatus != null and connectionStatus != ''">connection_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="type != null">type,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userLevel != null">#{userLevel},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="area != null">#{area},</if>
+            <if test="identityCategory != null and identityCategory != ''">#{identityCategory},</if>
+            <if test="helpInformation != null and helpInformation != ''">#{helpInformation},</if>
+            <if test="connectionStatus != null and connectionStatus != ''">#{connectionStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="type != null">#{type},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOwnerSystem" parameterType="OwnerSystem">
+        update tb_owner_system
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userLevel != null">user_level = #{userLevel},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="identityCategory != null and identityCategory != ''">identity_category = #{identityCategory},</if>
+            <if test="helpInformation != null and helpInformation != ''">help_information = #{helpInformation},</if>
+            <if test="connectionStatus != null and connectionStatus != ''">connection_status = #{connectionStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOwnerSystemById" parameterType="Long">
+        delete from tb_owner_system where id = #{id}
+    </delete>
+
+    <delete id="deleteOwnerSystemByIds" parameterType="String">
+        delete from tb_owner_system where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectOwnerSystemListByUserLevel" parameterType="OwnerSystem" resultMap="OwnerSystemResult">
+        SELECT
+        id,
+        name,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        identity_category,
+        help_information,
+        connection_status,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+        FROM
+
+        (
+
+
+
+SELECT
+	id,
+	name,
+	user_level,
+	phone,
+	province,
+	city,
+	area,
+	identity_category,
+	help_information,
+	connection_status,
+	create_by,
+	create_time,
+	update_by,
+	update_time,
+	remark,
+	type,
+	user_id
+FROM
+	tb_owner_system
+
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="identityCategory != null  and identityCategory != ''"> and identity_category = #{identityCategory}</if>
+            <if test="helpInformation != null  and helpInformation != ''"> and help_information = #{helpInformation}</if>
+            <if test="connectionStatus != null  and connectionStatus != ''"> and connection_status = #{connectionStatus}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+
+        union
+        (
+
+        SELECT
+        id,
+        name,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        identity_category,
+        help_information,
+        connection_status,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+        FROM
+        tb_owner_system
+
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="identityCategory != null  and identityCategory != ''"> and identity_category = #{identityCategory}</if>
+            <if test="helpInformation != null  and helpInformation != ''"> and help_information = #{helpInformation}</if>
+            <if test="connectionStatus != null  and connectionStatus != ''"> and connection_status = #{connectionStatus}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id != #{userId}</if>
+        </where>
+        LIMIT
+        #{userLevelNum}
+        )
+        ) a
+    </select>
+</mapper>

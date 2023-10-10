@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ShippingSystemMapper">
+    
+    <resultMap type="ShippingSystem" id="ShippingSystemResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userLevel"    column="user_level"    />
+        <result property="phone"    column="phone"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="area"    column="area"    />
+        <result property="jobArea"    column="job_area"    />
+        <result property="homePort"    column="home_port"    />
+        <result property="jobWay"    column="job_way"    />
+        <result property="shipLength"    column="ship_length"    />
+        <result property="materialQuality"    column="material_quality"    />
+        <result property="annualFuel"    column="annual_fuel"    />
+        <result property="certificates"    column="certificates"    />
+        <result property="equipment"    column="equipment"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="type"    column="type"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectShippingSystemVo">
+        select id, name, user_level, phone, province, city, area, job_area, home_port, job_way, ship_length, material_quality, annual_fuel, certificates, equipment, create_by, create_time, update_by, update_time, remark, type, user_id from tb_shipping_system
+    </sql>
+
+    <select id="selectShippingSystemList" parameterType="ShippingSystem" resultMap="ShippingSystemResult">
+        <include refid="selectShippingSystemVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="jobArea != null  and jobArea != ''"> and job_area = #{jobArea}</if>
+            <if test="homePort != null  and homePort != ''"> and home_port = #{homePort}</if>
+            <if test="jobWay != null  and jobWay != ''"> and job_way = #{jobWay}</if>
+            <if test="shipLength != null  and shipLength != ''"> and ship_length = #{shipLength}</if>
+            <if test="materialQuality != null  and materialQuality != ''"> and material_quality = #{materialQuality}</if>
+            <if test="annualFuel != null  and annualFuel != ''"> and annual_fuel = #{annualFuel}</if>
+            <if test="certificates != null  and certificates != ''"> and certificates = #{certificates}</if>
+            <if test="equipment != null  and equipment != ''"> and equipment = #{equipment}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectShippingSystemById" parameterType="Long" resultMap="ShippingSystemResult">
+        <include refid="selectShippingSystemVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertShippingSystem" parameterType="ShippingSystem" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_shipping_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userLevel != null">user_level,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="area != null">area,</if>
+            <if test="jobArea != null and jobArea != ''">job_area,</if>
+            <if test="homePort != null and homePort != ''">home_port,</if>
+            <if test="jobWay != null and jobWay != ''">job_way,</if>
+            <if test="shipLength != null and shipLength != ''">ship_length,</if>
+            <if test="materialQuality != null and materialQuality != ''">material_quality,</if>
+            <if test="annualFuel != null and annualFuel != ''">annual_fuel,</if>
+            <if test="certificates != null and certificates != ''">certificates,</if>
+            <if test="equipment != null and equipment != ''">equipment,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="type != null">type,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userLevel != null">#{userLevel},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="area != null">#{area},</if>
+            <if test="jobArea != null and jobArea != ''">#{jobArea},</if>
+            <if test="homePort != null and homePort != ''">#{homePort},</if>
+            <if test="jobWay != null and jobWay != ''">#{jobWay},</if>
+            <if test="shipLength != null and shipLength != ''">#{shipLength},</if>
+            <if test="materialQuality != null and materialQuality != ''">#{materialQuality},</if>
+            <if test="annualFuel != null and annualFuel != ''">#{annualFuel},</if>
+            <if test="certificates != null and certificates != ''">#{certificates},</if>
+            <if test="equipment != null and equipment != ''">#{equipment},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="type != null">#{type},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateShippingSystem" parameterType="ShippingSystem">
+        update tb_shipping_system
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userLevel != null">user_level = #{userLevel},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="jobArea != null and jobArea != ''">job_area = #{jobArea},</if>
+            <if test="homePort != null and homePort != ''">home_port = #{homePort},</if>
+            <if test="jobWay != null and jobWay != ''">job_way = #{jobWay},</if>
+            <if test="shipLength != null and shipLength != ''">ship_length = #{shipLength},</if>
+            <if test="materialQuality != null and materialQuality != ''">material_quality = #{materialQuality},</if>
+            <if test="annualFuel != null and annualFuel != ''">annual_fuel = #{annualFuel},</if>
+            <if test="certificates != null and certificates != ''">certificates = #{certificates},</if>
+            <if test="equipment != null and equipment != ''">equipment = #{equipment},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteShippingSystemById" parameterType="Long">
+        delete from tb_shipping_system where id = #{id}
+    </delete>
+
+    <delete id="deleteShippingSystemByIds" parameterType="String">
+        delete from tb_shipping_system where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectShippingSystemListByUserLevel" parameterType="ShippingSystem" resultMap="ShippingSystemResult">
+
+        SELECT
+        id,
+        NAME,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        job_area,
+        home_port,
+        job_way,
+        ship_length,
+        material_quality,
+        annual_fuel,
+        certificates,
+        equipment,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+        FROM
+        (
+
+
+SELECT
+id,
+NAME,
+user_level,
+phone,
+province,
+city,
+area,
+job_area,
+home_port,
+job_way,
+ship_length,
+material_quality,
+annual_fuel,
+certificates,
+equipment,
+create_by,
+create_time,
+update_by,
+update_time,
+remark,
+type,
+user_id
+FROM
+	tb_shipping_system
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="jobArea != null  and jobArea != ''"> and job_area = #{jobArea}</if>
+            <if test="homePort != null  and homePort != ''"> and home_port = #{homePort}</if>
+            <if test="jobWay != null  and jobWay != ''"> and job_way = #{jobWay}</if>
+            <if test="shipLength != null  and shipLength != ''"> and ship_length = #{shipLength}</if>
+            <if test="materialQuality != null  and materialQuality != ''"> and material_quality = #{materialQuality}</if>
+            <if test="annualFuel != null  and annualFuel != ''"> and annual_fuel = #{annualFuel}</if>
+            <if test="certificates != null  and certificates != ''"> and certificates = #{certificates}</if>
+            <if test="equipment != null  and equipment != ''"> and equipment = #{equipment}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+
+        union
+
+(
+
+        SELECT
+        id,
+        NAME,
+        user_level,
+        phone,
+        province,
+        city,
+        area,
+        job_area,
+        home_port,
+        job_way,
+        ship_length,
+        material_quality,
+        annual_fuel,
+        certificates,
+        equipment,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        type,
+        user_id
+        FROM
+        tb_shipping_system
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="jobArea != null  and jobArea != ''"> and job_area = #{jobArea}</if>
+            <if test="homePort != null  and homePort != ''"> and home_port = #{homePort}</if>
+            <if test="jobWay != null  and jobWay != ''"> and job_way = #{jobWay}</if>
+            <if test="shipLength != null  and shipLength != ''"> and ship_length = #{shipLength}</if>
+            <if test="materialQuality != null  and materialQuality != ''"> and material_quality = #{materialQuality}</if>
+            <if test="annualFuel != null  and annualFuel != ''"> and annual_fuel = #{annualFuel}</if>
+            <if test="certificates != null  and certificates != ''"> and certificates = #{certificates}</if>
+            <if test="equipment != null  and equipment != ''"> and equipment = #{equipment}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="userId != null "> and user_id != #{userId}</if>
+        </where>
+
+        LIMIT
+        #{userLevelNum}
+        )
+
+        ) a
+
+
+
+
+
+    </select>
+</mapper>
